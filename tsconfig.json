@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "composite": true,
+    "declaration": true,
+    "declarationMap": false,
+    "downlevelIteration": true,
+    "emitDecoratorMetadata": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "preserveConstEnums": true,
+    "importHelpers": false,
+    "lib": ["esnext", "dom"],
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "sourceMap": false,
+    "resolveJsonModule": true,
+    "noUnusedLocals": true,
+    "strict": true,
+    "target": "es5",
+    "rootDir": "src",
+    "outDir": "dist"
+  },
+  "include": ["src", "src/typings/**/*.d.ts"]
+}
