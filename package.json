@@ -52,7 +52,6 @@
   "license": "MIT",
   "dependencies": {
     "@types/type-is": "^1.6.3",
-    "@ygkit/object": "^0.0.3",
     "type-is": "^1.6.18"
   },
   "devDependencies": {
