@@ -1,6 +1,6 @@
 {
   "name": "@slsplus/serverless-http",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Serverless HTTP Proxy",
   "main": "./dist/index.js",
   "publishConfig": {

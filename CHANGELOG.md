@@ -1,3 +1,10 @@
+## [0.0.3](https://github.com/serverless-plus/serverless-http/compare/v0.0.2...v0.0.3) (2021-03-01)
+
+
+### Bug Fixes
+
+* remove unuse deps ([2391f99](https://github.com/serverless-plus/serverless-http/commit/2391f994817a53fcb3399dd295ce9d90b72b6be7))
+
 ## [0.0.2](https://github.com/serverless-plus/serverless-http/compare/v0.0.1...v0.0.2) (2021-03-01)
 
 
