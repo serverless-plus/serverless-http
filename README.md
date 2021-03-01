@@ -30,6 +30,7 @@ const proxy = new ServerlessProxy({
   server,
 });
 
+// mock event
 const event = {
   requestContext: {
     serviceId: 'service-xxx',
