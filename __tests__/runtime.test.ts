@@ -4,6 +4,7 @@ import RuntimeMockServer from './fixtures/runtimes/tencent.mock';
 
 const appPath = join(__dirname, './fixtures/runtimes/app.mock.ts');
 process.env.SLS_START_CMD = `ts-node ${appPath}`;
+process.env.SLS_SERVER_PORT = `${9009}`;
 
 describe('Serverless Runtime', () => {
   const runtime = new TencentRuntime();
