@@ -13,32 +13,53 @@ const APIS = {
   error: '/runtime/invocation/error',
 };
 
-export class TencentRuntime {
+export interface TencentRuntimeOptions {
   debug: boolean;
-  initalized: boolean;
   startCmd: string;
-  port: number;
+  serverPort: number;
+}
+
+export class TencentRuntime {
+  // debug mode
+  debug: boolean;
+
+  // whether http server is initialized
+  initalized: boolean;
+
+  // start command for http server
+  startCmd: string;
+
+  // http server port
+  serverPort: number;
+
+  // serverless proxy
   proxy: ServerlessProxy;
+
+  // child process for starting http server
   childProcess: ChildProcess | null;
+
+  // custom runtime api request options
   requestOptions: {
     host: string;
     port: number;
   };
 
-  constructor(debug = false) {
+  constructor(options?: TencentRuntimeOptions) {
     this.requestOptions = {
       host: RUNTIME_API,
       port: RUNTIME_API_PORT,
     };
 
-    this.debug = debug;
+    options = options || ({} as TencentRuntimeOptions);
+
+    this.debug = options.debug ?? false;
     this.initalized = false;
-    this.startCmd = process.env.SLS_START_CMD ?? 'node app.js';
-    this.port = Number(process.env.SLS_SERVER_PORT) || 9000;
+    this.startCmd = options.startCmd ?? 'node app.js';
+    this.serverPort = Number(options.serverPort) || 9000;
 
     this.proxy = new ServerlessProxy({
       host: 'localhost',
-      port: this.port,
+      port: this.serverPort,
     });
 
     this.childProcess = null;
@@ -95,7 +116,7 @@ export class TencentRuntime {
   async isServerReady() {
     let ready = false;
     while (!ready) {
-      ready = await this.isPortInUse(this.port);
+      ready = await this.isPortInUse(this.serverPort);
       await sleep(100);
       if (ready) {
         this.initalized = true;
