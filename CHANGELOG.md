@@ -1,3 +1,10 @@
+# [0.1.0](https://github.com/serverless-plus/serverless-http/compare/v0.0.3...v0.1.0) (2021-03-08)
+
+
+### Features
+
+* support tencent custom runtime ([#4](https://github.com/serverless-plus/serverless-http/issues/4)) ([9e60dd7](https://github.com/serverless-plus/serverless-http/commit/9e60dd777f291a43a0c7189507d22123856bae9f))
+
 ## [0.0.3](https://github.com/serverless-plus/serverless-http/compare/v0.0.2...v0.0.3) (2021-03-01)
 
 
