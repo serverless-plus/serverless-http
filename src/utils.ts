@@ -19,3 +19,11 @@ export function isObject(obj: AnyObject): boolean {
 export function isEmptyObject(obj: AnyObject): boolean {
   return Object.keys(obj).length === 0;
 }
+
+export function sleep(ms: number) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(true);
+    }, ms);
+  });
+}

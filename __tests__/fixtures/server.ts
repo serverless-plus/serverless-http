@@ -1,4 +1,3 @@
-import http from 'http';
 import express, { Request, Response } from 'express';
 
 const app = express();
@@ -22,6 +21,4 @@ app.post('/', (req: Request, res: Response) => {
   });
 });
 
-const server = http.createServer(app);
-
-export default server;
+export default app;
