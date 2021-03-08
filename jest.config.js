@@ -6,7 +6,7 @@ const config = {
   transform: {
     '^.+\\.tsx?$': 'ts-jest',
   },
-  testTimeout: 60000,
+  testTimeout: 5000,
   testEnvironment: 'node',
   testRegex: '/__tests__/.*\\.(test|spec)\\.(js|ts)$',
   testPathIgnorePatterns: ['/node_modules/', '/dist/', '/__tests__/fixtures/'],
