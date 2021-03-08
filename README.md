@@ -24,10 +24,8 @@ app.get('/', (req, res) => {
   res.send('Hello Serverless Express');
 });
 
-const server = http.createServer(app);
-
 const proxy = new ServerlessProxy({
-  server,
+  requestListenser: app,
 });
 
 // mock event

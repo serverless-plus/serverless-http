@@ -1,10 +1,12 @@
+import http from 'http';
 import { ServerlessProxy } from '../src/proxy';
-import server from './fixtures/server';
+import app from './fixtures/server';
 import GetEvent from './fixtures/events/get';
 import PostEvent from './fixtures/events/post';
 import { ApigwEvent } from '../src/typings';
 
 describe('ServerlessProxy', () => {
+  const server = http.createServer(app);
   test(`[get] Proxy without server option`, async (done) => {
     server.listen(9000, async () => {
       const proxy = new ServerlessProxy();
@@ -31,11 +33,11 @@ describe('ServerlessProxy', () => {
 
   test(`[get] Proxy with server`, async () => {
     const proxy = new ServerlessProxy({
-      server,
+      requestListenser: app,
     });
 
     const res = await proxy.getResponse(GetEvent as ApigwEvent);
-    server.close();
+    proxy.server?.close();
 
     expect(res).toEqual({
       headers: {
@@ -79,11 +81,11 @@ describe('ServerlessProxy', () => {
 
   test(`[Post] Proxy with server`, async () => {
     const proxy = new ServerlessProxy({
-      server,
+      requestListenser: app,
     });
 
     const res = await proxy.getResponse(PostEvent as ApigwEvent);
-    server.close();
+    proxy.server?.close();
 
     expect(res).toEqual({
       headers: {

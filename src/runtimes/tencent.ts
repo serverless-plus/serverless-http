@@ -17,8 +17,10 @@ export interface TencentRuntimeOptions {
   debug: boolean;
   startCmd: string;
   serverPort: number;
+  proxy?: ServerlessProxy;
 }
 
+// custom runtime proxy for tencent cloud
 export class TencentRuntime {
   // debug mode
   debug: boolean;
@@ -57,10 +59,14 @@ export class TencentRuntime {
     this.startCmd = options.startCmd ?? 'node app.js';
     this.serverPort = Number(options.serverPort) || 9000;
 
-    this.proxy = new ServerlessProxy({
-      host: 'localhost',
-      port: this.serverPort,
-    });
+    if (options.proxy) {
+      this.proxy = options.proxy;
+    } else {
+      this.proxy = new ServerlessProxy({
+        host: 'localhost',
+        port: this.serverPort,
+      });
+    }
 
     this.childProcess = null;
   }
