@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# Run entry file
+/var/lang/node12/bin/node index.js
+
