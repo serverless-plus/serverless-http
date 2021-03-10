@@ -67,7 +67,7 @@ describe('ServerlessProxy', () => {
 
   test(`[UDS get] Proxy with server`, async () => {
     const proxy = new ServerlessProxy({
-      requestListenser: app,
+      requestListener: app,
     });
     await proxy.start();
 
@@ -91,7 +91,7 @@ describe('ServerlessProxy', () => {
 
   test(`[UDS Post] Proxy with server`, async () => {
     const proxy = new ServerlessProxy({
-      requestListenser: app,
+      requestListener: app,
     });
     await proxy.start();
 
@@ -115,7 +115,7 @@ describe('ServerlessProxy', () => {
 
   test(`[ChildProcess get] Proxy with server`, async () => {
     const proxy = new ServerlessProxy({
-      requestListenser: app,
+      requestListener: app,
       useChildProcess: true,
       startCmd,
       port: 9009,
@@ -142,7 +142,7 @@ describe('ServerlessProxy', () => {
 
   test(`[ChildProcess Post] Proxy with server`, async () => {
     const proxy = new ServerlessProxy({
-      requestListenser: app,
+      requestListener: app,
       useChildProcess: true,
       startCmd,
       port: 9009,

@@ -11,7 +11,7 @@ interface ProxyOptions {
   port?: number;
   framework?: string;
   binaryTypes?: string[];
-  requestListenser?: RequestListener;
+  requestListener?: RequestListener;
   startCmd?: string;
   useChildProcess?: boolean;
 }
@@ -55,7 +55,7 @@ export class ServerlessProxy {
         .slice(2)}.sock`;
       this.socket = socket;
 
-      this.server = http.createServer(this.options.requestListenser);
+      this.server = http.createServer(this.options.requestListener);
       this.server.on('error', (error: Error & { code: string }) => {
         // UDS mode，retry when listen port is in use
         if (error.code === 'EADDRINUSE' && this.socket) {

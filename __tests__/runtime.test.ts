@@ -5,7 +5,7 @@ import app from './fixtures/server';
 
 describe('Serverless Runtime', () => {
   const proxy = new ServerlessProxy({
-    requestListenser: app,
+    requestListener: app,
   });
   const runtime = new TencentRuntime({
     debug: true,
