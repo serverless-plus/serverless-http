@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
 });
 
 const proxy = new ServerlessProxy({
-  requestListenser: app,
+  requestListener: app,
 });
 
 // export serverless handler function
@@ -58,7 +58,7 @@ app.get('/', (req, res) => {
 });
 
 const proxy = new ServerlessProxy({
-  requestListenser: app,
+  requestListener: app,
   useChildProcess: true,
 });
 
@@ -78,7 +78,7 @@ import app from './app';
 
 async function start() {
   const proxy = new ServerlessProxy({
-    requestListenser: app,
+    requestListener: app,
   });
   const runtime = new TencentRuntime({
     proxy,

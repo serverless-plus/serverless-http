@@ -3,7 +3,7 @@ import app from './app';
 
 async function start() {
   const proxy = new ServerlessProxy({
-    requestListenser: app,
+    requestListener: app,
   });
   const runtime = new TencentRuntime({
     proxy,

@@ -9,7 +9,7 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 const proxy = new ServerlessProxy({
-  requestListenser: app,
+  requestListener: app,
 });
 
 exports.handler = async (event: ApigwEvent) => {
