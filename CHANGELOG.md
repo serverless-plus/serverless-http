@@ -1,3 +1,10 @@
+## [0.2.1](https://github.com/serverless-plus/serverless-http/compare/v0.2.0...v0.2.1) (2021-03-10)
+
+
+### Bug Fixes
+
+* typo ([d37bc19](https://github.com/serverless-plus/serverless-http/commit/d37bc19444b08aaa9ef747e5caa9842cedc1f059))
+
 # [0.2.0](https://github.com/serverless-plus/serverless-http/compare/v0.1.0...v0.2.0) (2021-03-10)
 
 
