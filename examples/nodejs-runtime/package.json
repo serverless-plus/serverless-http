@@ -9,7 +9,7 @@
   "author": "yugasun",
   "license": "MIT",
   "dependencies": {
-    "@slsplus/serverless-http": "^0.1.0",
+    "@slsplus/serverless-http": "^0.2.0",
     "@types/express": "^4.17.11",
     "express": "^4.17.1"
   },
