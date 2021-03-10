@@ -1,28 +1,25 @@
-import { join } from 'path';
-import { TencentRuntime } from '../src/runtimes';
+import { Server } from 'http';
+import { ServerlessProxy, TencentRuntime } from '../src';
 import RuntimeMockServer from './fixtures/runtimes/tencent.mock';
-
-const appPath = join(__dirname, './fixtures/runtimes/app.mock.ts');
-const startCmd = `ts-node ${appPath}`;
+import app from './fixtures/server';
 
 describe('Serverless Runtime', () => {
+  const proxy = new ServerlessProxy({
+    requestListenser: app,
+  });
   const runtime = new TencentRuntime({
     debug: true,
-    startCmd: startCmd,
-    serverPort: 9009,
+    proxy,
   });
-  beforeAll(() => {
+
+  let proxyServer: Server;
+  beforeAll(async () => {
     RuntimeMockServer.listen(9001);
+    proxyServer = (await proxy.start()) as Server;
   });
-  afterAll(() => {
+  afterAll(async () => {
     RuntimeMockServer.close();
-    runtime.childProcess?.kill();
-  });
-
-  test(`startServer()`, async () => {
-    const cpr = await runtime.startServer();
-
-    expect(typeof cpr.pid).toBe('number');
+    proxyServer.close();
   });
 
   test(`ready()`, async () => {

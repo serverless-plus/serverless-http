@@ -1,0 +1,25 @@
+component: scf
+name: custom-runtime-demo
+
+inputs:
+  name: custom-runtime-demo
+  src:
+    src: ./dist
+    exclude:
+      - .env
+  region: ap-guangzhou
+  runtime: CustomRuntime
+  handler: index.js
+  events:
+    - apigw:
+        parameters:
+          protocols:
+            - http
+            - https
+          environment: release
+          endpoints:
+            - path: /
+              method: ANY
+              function:
+                isIntegratedResponse: true
+                functionQualifier: $DEFAULT

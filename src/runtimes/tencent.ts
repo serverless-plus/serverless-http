@@ -1,6 +1,4 @@
 import { ServerlessProxy, request } from '../';
-import { sleep } from '../utils';
-import { spawn, ChildProcess } from 'child_process';
 import net from 'net';
 import { AnyObject, RequestOptions } from '../typings';
 
@@ -14,10 +12,8 @@ const APIS = {
 };
 
 export interface TencentRuntimeOptions {
-  debug: boolean;
-  startCmd: string;
-  serverPort: number;
-  proxy?: ServerlessProxy;
+  debug?: boolean;
+  proxy: ServerlessProxy;
 }
 
 // custom runtime proxy for tencent cloud
@@ -25,20 +21,8 @@ export class TencentRuntime {
   // debug mode
   debug: boolean;
 
-  // whether http server is initialized
-  initalized: boolean;
-
-  // start command for http server
-  startCmd: string;
-
-  // http server port
-  serverPort: number;
-
   // serverless proxy
   proxy: ServerlessProxy;
-
-  // child process for starting http server
-  childProcess: ChildProcess | null;
 
   // custom runtime api request options
   requestOptions: {
@@ -55,20 +39,8 @@ export class TencentRuntime {
     options = options || ({} as TencentRuntimeOptions);
 
     this.debug = options.debug ?? false;
-    this.initalized = false;
-    this.startCmd = options.startCmd ?? 'node app.js';
-    this.serverPort = Number(options.serverPort) || 9000;
 
-    if (options.proxy) {
-      this.proxy = options.proxy;
-    } else {
-      this.proxy = new ServerlessProxy({
-        host: 'localhost',
-        port: this.serverPort,
-      });
-    }
-
-    this.childProcess = null;
+    this.proxy = options.proxy;
   }
 
   /**
@@ -113,63 +85,6 @@ export class TencentRuntime {
           resolve(false);
         }
       });
-    });
-  }
-
-  /**
-   * Whether http server is ready
-   */
-  async isServerReady() {
-    let ready = false;
-    while (!ready) {
-      ready = await this.isPortInUse(this.serverPort);
-      await sleep(100);
-      if (ready) {
-        this.initalized = true;
-        return true;
-      }
-    }
-  }
-
-  /**
-   * start http server
-   */
-  startServer(): Promise<ChildProcess> {
-    return new Promise(async (resolve, reject) => {
-      if (!this.startCmd) {
-        reject(new Error('Missing start command'));
-        return;
-      }
-      if (this.initalized && this.childProcess) {
-        resolve(this.childProcess);
-        return;
-      }
-      console.log('Starting serverless server');
-      const [cmd, ...args] = this.startCmd.split(' ');
-      const cpr = spawn(cmd, args, {
-        cwd: process.cwd(),
-      });
-
-      cpr.stdout.pipe(process.stdout);
-      cpr.stderr.pipe(process.stderr);
-
-      cpr.on('error', (err) => {
-        console.log(`Child process error: ${err}`);
-
-        this.initalized = false;
-        reject(err);
-      });
-
-      cpr.on('exit', (code, signal) => {
-        const msg = `Child process exist with code: ${code}, signal: ${signal}`;
-        this.initalized = false;
-        reject(new Error(msg));
-      });
-
-      // await sleep(1000);
-      await this.isServerReady();
-      this.childProcess = cpr;
-      resolve(cpr);
     });
   }
 
