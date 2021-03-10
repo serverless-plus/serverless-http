@@ -1,3 +1,10 @@
+# [0.2.0](https://github.com/serverless-plus/serverless-http/compare/v0.1.0...v0.2.0) (2021-03-10)
+
+
+### Features
+
+* optimize proxy and runtime ([#5](https://github.com/serverless-plus/serverless-http/issues/5)) ([10c1072](https://github.com/serverless-plus/serverless-http/commit/10c1072507ad6b458c57af0843019ed7d3d5e587))
+
 # [0.1.0](https://github.com/serverless-plus/serverless-http/compare/v0.0.3...v0.1.0) (2021-03-08)
 
 
