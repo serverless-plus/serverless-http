@@ -1,3 +1,10 @@
+## [0.2.2](https://github.com/serverless-plus/serverless-http/compare/v0.2.1...v0.2.2) (2021-03-22)
+
+
+### Bug Fixes
+
+* tencent runtime add startLoop method ([5682a5a](https://github.com/serverless-plus/serverless-http/commit/5682a5a533352cc0fc0daf051cf0b992d73c4621))
+
 ## [0.2.1](https://github.com/serverless-plus/serverless-http/compare/v0.2.0...v0.2.1) (2021-03-10)
 
 
