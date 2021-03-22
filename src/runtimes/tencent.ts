@@ -44,6 +44,31 @@ export class TencentRuntime {
   }
 
   /**
+   * start loop to handler event
+   */
+  async startLoop() {
+    // start http server
+    await this.proxy.start();
+
+    // post ready -- finish initialization
+    await this.ready();
+    console.log(`Initialize success`);
+
+    try {
+      while (true) {
+        await this.run();
+      }
+    } catch (e) {
+      await this.error({
+        statusCode: 501,
+        body: `Code Error: ${e}`,
+        headers: {},
+        isBase64Encoded: false,
+      });
+    }
+  }
+
+  /**
    * Run apigw event trigger flow
    */
   async run() {
